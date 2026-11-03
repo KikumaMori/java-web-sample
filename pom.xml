@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.example</groupId>
+    <artifactId>teavm-github-pages-demo</artifactId>
+    <version>1.0-SNAPSHOT</version>
+
+    <properties>
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <teavm.version>0.10.2</teavm.version>
+    </properties>
+
+    <dependencies>
+        <!-- TeaVMクラスライブラリ -->
+        <dependency>
+            <groupId>org.teavm</groupId>
+            <artifactId>teavm-classlib</artifactId>
+            <version>${teavm.version}</version>
+            <scope>provided</scope>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <!-- TeaVM Maven Plugin -->
+            <plugin>
+                <groupId>org.teavm</groupId>
+                <artifactId>teavm-maven-plugin</artifactId>
+                <version>${teavm.version}</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>compile</goal>
+                        </goals>
+                        <phase>package</phase>
+                        <configuration>
+                            <mainClass>com.example.App</mainClass>
+                            <targetDirectory>${project.build.directory}/dist</targetDirectory>
+                            <targetFileName>app.js</targetFileName>
+                            <minifying>true</minifying>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-resources-plugin</artifactId>
+                <version>3.3.1</version>
+                <executions>
+                    <execution>
+                        <id>copy-resources</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>copy-resources</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>${project.build.directory}/dist</outputDirectory>
+                            <resources>
+                                <resource>
+                                    <directory>src/main/webapp</directory>
+                                </resource>
+                            </resources>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+</project>

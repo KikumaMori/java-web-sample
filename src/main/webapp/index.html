@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>TeaVM Java on GitHub Pages</title>
+</head>
+<body>
+    <h1>Javaで作ったWebアプリ (TeaVM)</h1>
+    <p id="message">Javaの読み込みを待っています...</p>
+
+    <script src="app.js"></script>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            if (typeof main === 'function') {
+                main();
+            } else {
+                console.error("TeaVMのmain関数が見つかりません。");
+            }
+        });
+    </script>
+</body>
+</html>
